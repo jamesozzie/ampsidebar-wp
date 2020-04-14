@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: AMP Sidebar Hamburger Menu
- * Plugin URI: http://www.jamesozz.ie
+ * Plugin URI: https://github.com/jamesozzie/ampsidebar-wp
  * Description: Easily implement an amp-sidebar into your site using a shortcode or theme insertion. Great for non AMP compatible themes.
  * Version: 1.0
  * Author: James Osborne
@@ -58,8 +58,8 @@ function jozz_ampsidebar_colors_script($hook_suffix)
 }
 
 // Set the CSS & defaults
-add_action('wp_head', 'jozz_ampsidebar_cssdefaults');
-function jozz_ampsidebar_cssdefaults()
+add_action('wp_head', 'jozz_ampsidebarvariablecolor_cssdefaults');
+function jozz_ampsidebarvariablecolor_cssdefaults()
 {
 	$jz_ampsidebar_mobiledisplay = esc_attr(get_option('jz_ampsidebar_mobiledisplay'));
     $ampsidebar_color = esc_attr(get_option('ampsidebar_color', '#314a5e')); ?>
@@ -136,7 +136,7 @@ add_shortcode('jz-sidebar', 'jz_ampsidebar_shortcode');
 
  // Custom menu walker - to set the dropdown toggles to the right using amp-accordion
 
- class jz_slidemenu_Walker extends Walker_Nav_Menu {
+ class jozzamp_slidemenu_Walker extends Walker_Nav_Menu {
     
     public function jozz_start_lvl( &$output, $depth = 0, $args = array() ) {
     		$output .= ' <amp-carousel height="1.8rem" layout="fixed-height" controls type="carousel" class="primary-nav fade">';
@@ -181,7 +181,7 @@ add_shortcode('jz-sidebar', 'jz_ampsidebar_shortcode');
      }
 }
 
-class jz_dropdown_Walker extends Walker_Nav_Menu {
+class jozzamp_dropdown_Walker extends Walker_Nav_Menu {
     static $count=0;
     public function jozz_start_lvl( &$output, $depth = 0, $args = array() ) {
     		
@@ -240,7 +240,7 @@ function jozz_ampsidebar_add_head_html() {
 					'theme_location' => 'amp_sidebar_menu' ,
 					'menu_class'     => 'jozz-menu',
 					'fallback_cb'    => 'jozz_ampsidebar_menufallback',
-					'walker' => new jz_dropdown_Walker()
+					'walker' => new jozzamp_dropdown_Walker()
 				 ) );
 			?>
     </ul></nav>
@@ -278,8 +278,8 @@ add_filter(
 );
 
 	// Make it work without the AMP plugin by calling AMP library scripts
-	add_action('wp_head', 'your_function_name');
-	function your_function_name(){
+	add_action('wp_head', 'jozz_sidebar_request_components');
+	function jozz_sidebar_request_components(){
 
 		include_once(ABSPATH.'wp-admin/includes/plugin.php');
 		if (!function_exists('is_plugin_active') || !is_plugin_active('amp/amp.php.php')) { 
@@ -343,8 +343,8 @@ add_action( 'amp_post_template_css', function() {
 
 
 //set the CSS defaults
-add_action('amp_post_template_css', 'jozz_sidebar_cssdefaults');
-function jozz_sidebar_cssdefaults()
+add_action('amp_post_template_css', 'jozz_ampsidebar_cssdefaults');
+function jozz_ampsidebar_cssdefaults()
 {
 	$ampsidebar_color = esc_attr(get_option('ampsidebar_color', '#314a5e')); 
 

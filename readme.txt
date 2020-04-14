@@ -38,7 +38,7 @@ If you're using the <a href=”https://wordpress.org/plugins/amp/”>official AM
 4. Insert the shortcode via a page builder using <code>[jz-sidebar]</code>, or insert into your theme files using <code><?php echo do_shortcode("[jz-sidebar]"); ?></code>
 
 Note: If you prefer to use your existing navigation menus button simply add the following attributes to your navigation button:
-<code>on="tap:sidenav.open" role="button" tabindex="0"</code>
+<code><?php if (is_amp_endpoint()){ ?> on="tap:sidenav.open" role="button" tabindex="0" <?php } ?></code>
 
 <br />
 
@@ -61,7 +61,7 @@ If you want to hide your existing hamburger menu for AMP URLs and use this plugi
 
 = Can I use my existing themes navigation button / hamburger menu? =
 Sure, you'll need to add the code snippet in between your button markup. If you’re unable to locate your themes navigation menu button check with your theme developer. You simply need to add the below in as an attribute to your existing button. 
-<code>on="tap:sidenav.open" role="button" tabindex="0"</code>
+<code><?php if (is_amp_endpoint()){ ?> on="tap:sidenav.open" role="button" tabindex="0" <?php } ?></code>
 
 <i>Please bear in mind this is a free plugin, while you can open a support topic don’t expect round the clock support or an instant replay! I will however respond to all questions as soon as possible.</i>
 
