@@ -140,7 +140,3 @@ The best place to find out more is amp.dev. Other useful resources below:
 
 = 1.0 =
 * Initial release
-
-
- 
-
