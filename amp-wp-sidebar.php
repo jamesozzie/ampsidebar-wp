@@ -181,7 +181,7 @@ add_shortcode('jz-sidebar', 'jz_ampsidebar_shortcode');
      }
 }
 
-class jozzamp_dropdown_Walker extends Walker_Nav_Menu {
+class jozz_ampsidebar_dropdown_walker extends Walker_Nav_Menu {
     static $count=0;
     public function jozz_start_lvl( &$output, $depth = 0, $args = array() ) {
     		
@@ -240,7 +240,7 @@ function jozz_ampsidebar_add_head_html() {
 					'theme_location' => 'amp_sidebar_menu' ,
 					'menu_class'     => 'jozz-menu',
 					'fallback_cb'    => 'jozz_ampsidebar_menufallback',
-					'walker' => new jozzamp_dropdown_Walker()
+					'walker' => new jozz_ampsidebar_dropdown_walker()
 				 ) );
 			?>
     </ul></nav>
