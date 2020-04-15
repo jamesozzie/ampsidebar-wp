@@ -14,8 +14,47 @@ function jozz_ampsidebar_custom_settings_start()
 
 <div class="wrap jozz_adminwrap">
     <h1>AMP Sidebar</h1>
-    This plugin places a simple back to top buttton on the footer of your site. It's a CSS only solution, no bloatware here! <br>
-    <i>If you're using the <a href="https://wordpress.org/plugins/amp/">official AMP plugin</a> you can use the options below to display the button on your AMP URLs, your non AMP URLs or both. </i>
+    This plugin will allow you to acheive a working multi level dropdown using the amp-sidebar component. Use the below, or the plugins <a href="https://plugins.wordpress.org/amp-sidebar-hamburger-menu">FAQ's page</a> for instructions on how it works. 
+    
+    <p>
+    <b>Option 1: Add to your content using a shortcode:</b> 
+    Insert the shortcode below into a page, post or widget. 
+    <br/><code>[jz-sidebar]</code>
+    
+    <br/><br/>
+    <b>Option 2: Inserting into your theme files (via shortcode):</b> 
+    An alternative option is to insert the following into your child theme files (after performing a backup) <br> 
+    <code><?php 
+     echo htmlspecialchars("<?php echo do_shortcode('[jz-sidebar]'); ?>");  ?> </code> 
+    
+
+    
+
+    <p> <b>Option 3: Use your existing navigation button / hamburger menu:</b><br>
+    If you prefer to use your existing navigation menus button simply add the following to your navigation button, as a data attribute (Between your button tag). <br/>You'll need to check with your theme developer for the location of the navigation menu:<br/>
+
+
+    <code><?php 
+     
+echo htmlspecialchars("<?php echo do_shortcode('[jz-navbarattribute]'); ?>");
+     
+?>
+
+
+ 
+
+
+</code>
+
+
+
+
+
+
+<p><i>* Please use a child theme for making any theme changes. Please also create a backup before editing any theme files! This plugin works best with the <a href="https://wordpress.org/plugins/amp/">official AMP plugin</a>  </i>
+
+<br><br>
+ 
 <form method="post" action="options.php">
     <?php
     settings_fields('jozz-ampsidebar-settings');

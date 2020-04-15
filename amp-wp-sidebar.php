@@ -94,7 +94,7 @@ register_nav_menus( array(
     'amp_sidebar_menu' => 'AMP sidebar menu',
 ) );
 
-// Create shortcode, including option rending for AMP
+// Create shortcode, including optional rendering for AMP
 	function jz_ampsidebar_shortcode() { 
     $jz_ampsidebar_viewoption = esc_attr(get_option('jz_ampsidebar_viewoption', 'AMP & Canonical'));
 
@@ -133,6 +133,21 @@ register_nav_menus( array(
 	return $ampsidebar_message;
 }
 add_shortcode('jz-sidebar', 'jz_ampsidebar_shortcode');
+
+
+// Create data attribute shortcode 
+function jzampsidebar_dataattribute_shortcode() { 
+ 
+	if (function_exists('is_amp_endpoint')&& is_amp_endpoint()) {
+	$navbarattribute = ' on="tap:sidenav.open" role="button" tabindex="0" '; 
+	return $navbarattribute; 
+	}else{
+		$navbarattribute = '';
+	return; 
+	} 
+}
+add_shortcode('jz-navbarattribute', 'jzampsidebar_dataattribute_shortcode');
+
 
  // Custom menu walker - to set the dropdown toggles to the right using amp-accordion
 
