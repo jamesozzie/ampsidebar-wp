@@ -4,8 +4,9 @@
  * Plugin URI: https://github.com/jamesozzie/ampsidebar-wp
  * Description: Easily implement an amp-sidebar into your site using a shortcode or theme insertion. Great for non AMP compatible themes.
  * Version: 1.0
- * Author: James Osborne
+ * Author: James Osborn
  * Author URI: http://www.jamesozz.ie
+ * Text Domain: amp-wp-sidebar
  */
 
 define('JOZZ_AMPSIDEBAR_PLUGIN_DIR', plugin_dir_path(__FILE__));
