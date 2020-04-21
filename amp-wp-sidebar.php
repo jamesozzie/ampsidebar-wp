@@ -3,7 +3,7 @@
  * Plugin Name: AMP Sidebar Hamburger Menu
  * Plugin URI: https://github.com/jamesozzie/ampsidebar-wp
  * Description: Easily implement an amp-sidebar into your site using a shortcode or theme insertion. Great for non AMP compatible themes.
- * Version: 1.0
+ * Version: 1.1.0
  * Author: James Osborne
  * Author URI: http://www.jamesozz.ie
  */

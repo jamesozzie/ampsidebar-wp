@@ -14,7 +14,7 @@ function jozz_ampsidebar_custom_settings_start()
 
 <div class="wrap jozz_adminwrap">
     <h1>AMP Sidebar</h1>
-    This plugin will allow you to acheive a working multi level dropdown using the amp-sidebar component. Use the below, or the plugins <a href="https://plugins.wordpress.org/amp-sidebar-hamburger-menu">FAQ's page</a> for instructions on how it works. 
+    This plugin will allow you to acheive a working multi level dropdown using the amp-sidebar component. Use the below, or the plugins <a href="https://wordpress.org/plugins/amp-sidebar-hamburger-menu/#description">FAQ's page</a> for instructions on how it works. 
     
     <p>
     <b>Option 1: Add to your content using a shortcode:</b> 
