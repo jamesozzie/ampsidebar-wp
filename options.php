@@ -58,7 +58,6 @@ echo htmlspecialchars("<?php echo do_shortcode('[jz-navbarattribute]'); ?>");
 <form method="post" action="options.php">
     <?php
     settings_fields('jozz-ampsidebar-settings');
-    settings_fields('jozz-ampsidebar-settings');
     ?>
      <table class="form-table">
           <tr> <th><label for="ampsidebar_color">Button Color</label></th>

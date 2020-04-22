@@ -3,7 +3,7 @@ Contributors: jamesosborne
 Tags: amp-sidebar, amp sidebar, navigation menu, navbar, amp navigation, hamburger dropdown, dropdown navigation menu
 Requires at least: 4.0
 Tested up to: 5.2.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -133,4 +133,9 @@ The best place to find out more is amp.dev. Other useful resources below:
 = 1.1.0 =
 * Corrected plugin link and minor changes
  
-
+= 1.2.0 =
+* Improved reader mode position
+* Removed duplicate option call 
+* Modified text and added styling to sidebar message which appears when users don't assign a menu 
+* Changes to the way the plugin uses amp-components when the AMP plugin is inactive
+ 

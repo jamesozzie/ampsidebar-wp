@@ -3,7 +3,7 @@
  * Plugin Name: AMP Sidebar Hamburger Menu
  * Plugin URI: https://github.com/jamesozzie/ampsidebar-wp
  * Description: Easily implement an amp-sidebar into your site using a shortcode or theme insertion. Great for non AMP compatible themes.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: James Osborne
  * Author URI: http://www.jamesozz.ie
  */
@@ -117,7 +117,7 @@ register_nav_menus( array(
 		
 	
 	} else{
-		$ampsidebar_message =	'	<div class="jzsidebar_container">
+		$ampsidebar_message =	'<div class="jzsidebar_container">
 		<svg class="sidenav-btn" on="tap:sidenav.open" role="button" tabindex="0" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.5 24.5">
 			<g stroke-linecap="round" stroke-miterlimit="10" stroke-width="3.5px">
 				<line x1="1.25" y1="1.25" x2="29.25" y2="1.25"></line>
@@ -126,7 +126,6 @@ register_nav_menus( array(
 			</g>
 		</svg>
 		</div>
-		
 		';
 	}
 	
@@ -250,6 +249,7 @@ function jozz_ampsidebar_add_head_html() {
             d="M1.25 20.72L20.72 1.25m-19.47 0l19.47 19.47" stroke-linecap="round" />
     </svg></div>
     <nav>
+	 
         <?php
 				wp_nav_menu( array(
 					'theme_location' => 'amp_sidebar_menu' ,
@@ -258,7 +258,7 @@ function jozz_ampsidebar_add_head_html() {
 					'walker' => new jozz_ampsidebar_dropdown_walker()
 				 ) );
 			?>
-    </ul></nav>
+  </nav>
 </amp-sidebar>
  </div>
 
@@ -267,11 +267,11 @@ function jozz_ampsidebar_add_head_html() {
 
 // Add a fallback message, informing users if they didn't assign a menu to the menu location
   function jozz_ampsidebar_menufallback() {
-  	echo '<div class="jozz_nomenu">No menu assigned! <br> Please assign your menu to the AMP "sidebar menu" location  </div>  ';
+  	echo '<div class="jozz_nomenu">No menu assigned! <br> Please assign your menu to the "AMP sidebar" menu location  </div>  ';
 	}
 
 // Add menu markup between amp-sidebar - with fallback for older non wp_body_open themes
-  if ( ! function_exists( 'wp_body_open' ) ) {
+  if ( function_exists( 'wp_body_open' ) ) {
     add_action( 'wp_body_open', 'jozz_ampsidebar_add_head_html' );
 } else {
     add_action( 'wp_footer', 'jozz_ampsidebar_add_head_html' );
@@ -296,8 +296,13 @@ add_filter(
 	add_action('wp_head', 'jozz_sidebar_request_components');
 	function jozz_sidebar_request_components(){
 
-		include_once(ABSPATH.'wp-admin/includes/plugin.php');
-		if (!function_exists('is_plugin_active') || !is_plugin_active('amp/amp.php.php')) { 
+// Makes sure the plugin is defined before trying to use it
+if ( ! function_exists( 'is_plugin_inactive' ) ) {
+    require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+}
+ 
+if ( is_plugin_inactive( 'amp/amp.php' ) || function_exists( 'is_amp_endpoint' ) && ! is_amp_endpoint() ) {
+    //plugin is not activated
 
 		?>   
   <script async src="https://cdn.ampproject.org/v0.js"></script>  
@@ -305,10 +310,11 @@ add_filter(
   <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
 
 	 <?php 
- }  
+ } 
 
 };
 
+// Add header override (to include custom bar with button)
 add_filter(
 	'amp_post_template_file',
 	function ( $template_file ) {
@@ -320,10 +326,10 @@ add_filter(
 		
 		
 	}
-);
+ );
 
 // Add button markup
-add_action( 'amp_post_template_head', 'jozz_ampsidebar_add_head_html' );
+add_action( 'amp_post_template_footer', 'jozz_ampsidebar_add_head_html', 99  );
  
 add_filter( 'amp_post_template_data', function( $data ) {
 	$data['amp_component_scripts'] = array_merge(
@@ -336,20 +342,24 @@ add_filter( 'amp_post_template_data', function( $data ) {
 	return $data;
 } );
 
-add_action( 'amp_post_template_css', function() {
- 	$ampsidebar_color = esc_attr(get_option('ampsidebar_color', '#314a5e')); 
-	$fullcss = include("style.css"); 
-
-	?>	
-	<style> 
-  <?php 
- include("style.css");
-?>
+ 
 
 
-</style>
-<?php 
-} );
+ 
+add_action( 'amp_post_template_css', 'xyz_amp_additional_css_styles' );
+
+function xyz_amp_additional_css_styles( $amp_template ) {
+	$ampsidebar_color = esc_attr(get_option('ampsidebar_color', '#314a5e'));  
+	$fullcss = include("style.css");
+	$dfdf = '.jzsidebar_container svg { stroke:'.$ampsidebar_color .' ;}';
+	echo $dfdf . $fullcss;
+	?>
+ 
+	<?php
+}
+
+
+ 
 
 
 
@@ -357,12 +367,8 @@ add_action( 'amp_post_template_css', function() {
 
 
 
-//set the CSS defaults
-add_action('amp_post_template_css', 'jozz_ampsidebar_cssdefaults');
-function jozz_ampsidebar_cssdefaults()
-{
-	$ampsidebar_color = esc_attr(get_option('ampsidebar_color', '#314a5e')); 
 
-	echo "<style>.jzsidebar_container svg { stroke: $ampsidebar_color  ;} </style>";
-	
-} 
+
+
+
+ 
