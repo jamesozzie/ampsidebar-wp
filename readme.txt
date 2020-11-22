@@ -2,7 +2,7 @@
 Contributors: jamesosborne
 Tags: amp-sidebar, amp sidebar, navigation menu, navbar, amp navigation, hamburger dropdown, dropdown navigation menu
 Requires at least: 4.0
-Tested up to: 5.2.4
+Tested up to: 5.5.3
 Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
